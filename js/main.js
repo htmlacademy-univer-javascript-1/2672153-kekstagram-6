@@ -5,7 +5,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-function createRandomIdFromRangeGenerator (min, max) {
+const createRandomIdFromRangeGenerator  = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -22,7 +22,7 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 };
 
-const names = [
+const names = [ //список имен для пользователя
     "Александр", "Мария", "Дмитрий", "Анна", "Сергей",
     "Екатерина", "Андрей", "Ольга", "Алексей", "Наталья",
     "Иван", "Ирина", "Максим", "Светлана", "Владимир",
@@ -31,7 +31,7 @@ const names = [
     "Виктория", "Роман", "Ксения", "Евгений", "Марина"
 ];
 
-const comments = [
+const comments = [ //список комментариев от пользователей
     "Всё отлично!",
     "В целом всё неплохо. Но не всё.",
     "Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.",
@@ -40,7 +40,7 @@ const comments = [
     "Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!"
 ];
 
-const photoDescriptions = [
+const photoDescriptions = [ //список описаний к фото
     "Закат на море",
     "Горный пейзаж",
     "Уютный вечер дома",
@@ -68,7 +68,7 @@ const photoDescriptions = [
     "Заброшенное здание"
 ];
 
-const createComment = (quantity) => {
+const createComment = (quantity) => { // функция, генерирующая комментарии
     let allComments = [];
     const generateIdComment = createRandomIdFromRangeGenerator(1, 750);
 
@@ -85,7 +85,7 @@ const createComment = (quantity) => {
     return allComments
 };
 
-const createPost = (quantity) => {
+const createPost = (quantity) => { //функция, генерирующая посты
     const generateId = createRandomIdFromRangeGenerator(1, quantity);
     const generateUrl = createRandomIdFromRangeGenerator(1, quantity);
     let posts = []
