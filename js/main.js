@@ -68,9 +68,9 @@ const photoDescriptions = [ //список описаний к фото
     "Заброшенное здание"
 ];
 
+const generateIdComment = createRandomIdFromRangeGenerator(1, 750);
 const createComment = (quantity) => { // функция, генерирующая комментарии
     let allComments = [];
-    const generateIdComment = createRandomIdFromRangeGenerator(1, 750);
 
     for (let i = 0; i < quantity; i++){
         let comment = {
@@ -85,9 +85,9 @@ const createComment = (quantity) => { // функция, генерирующа�
     return allComments
 };
 
+const generateId = createRandomIdFromRangeGenerator(1, quantity);
+const generateUrl = createRandomIdFromRangeGenerator(1, quantity);
 const createPost = (quantity) => { //функция, генерирующая посты
-    const generateId = createRandomIdFromRangeGenerator(1, quantity);
-    const generateUrl = createRandomIdFromRangeGenerator(1, quantity);
     let posts = []
     for (let i = 0; i < quantity; i++){
         let post = {
