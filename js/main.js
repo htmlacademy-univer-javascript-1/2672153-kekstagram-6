@@ -104,4 +104,4 @@ const createPost = (quantity) => { // функция, генерирующая �
     
 }
 
-let postsKekstagram = createPost(25);
+let postsFromKekstagram = createPost(25);
