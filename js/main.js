@@ -1,5 +1,9 @@
-import { createPost } from './data.js';
+import { createPhotos } from './utils.js';
+import { renderPictures } from './pictures.js';
 
+function init() {
+  const photos = createPhotos(25);
+  renderPictures(photos);
+}
 
-let postsFromKekstagram = createPost(25);
-console.log(postsFromKekstagram);
+init();
