@@ -1,4 +1,6 @@
 import { createPosts } from './data.js';
 import { renderPictures } from './miniatures.js';
 
-renderPictures(createPosts(5));
+const mockPosts = createPosts(25);
+
+renderPictures(mockPosts);
