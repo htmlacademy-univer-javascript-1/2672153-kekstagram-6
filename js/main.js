@@ -1,5 +1,6 @@
-import { createPost } from './data.js';
+import { createPosts } from './data.js';
+import { renderPictures } from './miniatures.js';
 
+const mockPosts = createPosts(25);
 
-let postsFromKekstagram = createPost(25);
-console.log(postsFromKekstagram);
+renderPictures(mockPosts);
