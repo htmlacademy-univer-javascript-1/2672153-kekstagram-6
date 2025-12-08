@@ -1,4 +1,9 @@
-import { createPosts } from './data.js';
-import { renderPictures } from './miniatures.js';
+import { createPhotos } from './utils.js';
+import { renderPictures } from './pictures.js';
 
-renderPictures(createPosts(5));
+function init() {
+  const photos = createPhotos(25);
+  renderPictures(photos);
+}
+
+init();
