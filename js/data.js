@@ -1,26 +1,4 @@
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const createRandomIdFromRangeGenerator  = (min, max) => {
-  const previousValues = [];
-
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      console.error('Перебраны все числа из диапазона от ' + min + ' до ' + max);
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
+import { createRandomIdFromRangeGenerator, getRandomInteger } from './util.js';
 
 const userNames = [ //список имен для пользователя
     "Александр", "Мария", "Дмитрий", "Анна", "Сергей",
@@ -68,16 +46,17 @@ const photoDescriptions = [ //список описаний к фото
     "Заброшенное здание"
 ];
 
+
 const generateIdComment = createRandomIdFromRangeGenerator(1, 750);
 const createComment = (quantity) => { // функция, генерирующая комментарии
     let allComments = [];
-
+    
     for (let i = 0; i < quantity; i++){
         let comment = {
             id: generateIdComment(),
             avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
             message: userComments[getRandomInteger(0, 5)],
-            name: userNames[getRandomInteger(0, names.length - 1)]
+            name: userNames[getRandomInteger(0, userNames.length - 1)]
         }
         allComments.push(comment)
     }
@@ -85,22 +64,21 @@ const createComment = (quantity) => { // функция, генерирующа�
     return allComments
 };
 
-const generateId = createRandomIdFromRangeGenerator(1, quantity);
-const generateUrl = createRandomIdFromRangeGenerator(1, quantity);
-const createPost = (quantity) => { //функция, генерирующая посты
+const createPost = (quantity) => { // функция, генерирующая посты
     let posts = []
+    const generateId = createRandomIdFromRangeGenerator(1, quantity);
+    const generateUrl = createRandomIdFromRangeGenerator(1, quantity);
     for (let i = 0; i < quantity; i++){
         let post = {
             id: generateId(),
-            url: `photos/${generateUrl}.jpg`,
+            url: `photos/${generateUrl()}.jpg`,
             description: photoDescriptions[getRandomInteger(0, photoDescriptions.length -1)],
             likes: getRandomInteger(15,200), 
             comments: createComment(getRandomInteger(0, 30))
         }
         posts.push(post)
     }
-    return posts
-    
-}
+    return posts   
+};
 
-let postsKekstagram = createPost(25);
+export { createPost }
