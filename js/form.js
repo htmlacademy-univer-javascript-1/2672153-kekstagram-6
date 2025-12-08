@@ -97,3 +97,5 @@ uploadHashtagElement.addEventListener('keydown', () => {
     pristine.reset();
   }
 });
+
+export { openForm };
