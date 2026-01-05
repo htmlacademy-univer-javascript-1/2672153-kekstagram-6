@@ -1,5 +1,7 @@
 import { sendPicture } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
+import { initImageScale, resetImageScale } from './shapes.js';
+import { initEffects, resetEffects } from './effects.js';
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
@@ -11,6 +13,8 @@ const submitButton = document.querySelector('#upload-submit');
 const openForm = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  initImageScale();
+  initEffects();
 };
 
 const closeForm = () => {
@@ -21,8 +25,10 @@ const closeForm = () => {
 const resetFormToDefault = () => {
   form.reset();
   fileInput.value = '';
+  resetImageScale();
+  resetEffects();
 
-  // ВАЖНО: когда подключишь масштаб/эффекты — здесь же сбрасывай:
+  // ВАЖНО: когда подключишь масштаб/эффекты - здесь же сбрасывай:
   // scale -> 100%, effect -> none/original, slider hidden и т.д.
 };
 
