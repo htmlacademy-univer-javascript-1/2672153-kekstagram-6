@@ -1,30 +1,36 @@
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const picturesContainer = document.querySelector('.pictures');
+import { openBigPicture } from './bigpictures.js';
 
-const createPictureElement = (pictureData) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
+export const renderPictures = (photos) => {
+  const template = document
+    .querySelector('#picture')
+    .content
+    .querySelector('.picture');
 
-  const imgElement = pictureElement.querySelector('.picture__img');
-  const likesElement = pictureElement.querySelector('.picture__likes');
-  const commentsElement = pictureElement.querySelector('.picture__comments');
+  const container = document.querySelector('.pictures');
 
-  imgElement.src = pictureData.url;
-  imgElement.alt = pictureData.description;
+  // удаляем старые миниатюры, если они уже были (оставляем только блоки, не являющиеся .picture)
+  container.querySelectorAll('.picture').forEach((item) => item.remove());
 
-  likesElement.textContent = pictureData.likes;
-  commentsElement.textContent = pictureData.comments.length;
-
-  return pictureElement;
-};
-
-const renderPictures = (picturesData) => {
   const fragment = document.createDocumentFragment();
 
-  picturesData.forEach((pictureData) => {
-    fragment.appendChild(createPictureElement(pictureData));
+  photos.forEach((photo) => {
+    const { url, description, likes, comments } = photo;
+
+    const node = template.cloneNode(true);
+
+    const img = node.querySelector('.picture__img');
+    img.src = url;
+    img.alt = description;
+
+    node.querySelector('.picture__likes').textContent = likes;
+    node.querySelector('.picture__comments').textContent = comments.length;
+
+    node.addEventListener('click', () => {
+      openBigPicture(photo);
+    });
+
+    fragment.appendChild(node);
   });
 
-  picturesContainer.append(fragment);
+  container.appendChild(fragment);
 };
-
-export { renderPictures };
