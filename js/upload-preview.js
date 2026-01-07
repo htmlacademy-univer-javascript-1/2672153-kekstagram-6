@@ -1,6 +1,4 @@
 const fileInput = document.querySelector('#upload-file');
-const overlay = document.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
 
 const previewImage = document.querySelector('.img-upload__preview img');
 const effectPreviews = document.querySelectorAll('.effects__preview');
@@ -10,10 +8,6 @@ fileInput.addEventListener('change', () => {
   if (!file) {
     return;
   }
-
-  // открываем форму
-  overlay.classList.remove('hidden');
-  body.classList.add('modal-open');
 
   // показываем выбранную фотку в превью
   const url = URL.createObjectURL(file);
