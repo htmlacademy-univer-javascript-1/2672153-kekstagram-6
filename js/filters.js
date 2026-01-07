@@ -49,7 +49,6 @@ const getFilteredPhotos = (filterId, photos) => {
 };
 
 const initFilters = (photos, onFilterChange) => {
- 
   filtersBlock.classList.remove('img-filters--inactive');
 
   const debouncedRender = debounce((filterId) => {
