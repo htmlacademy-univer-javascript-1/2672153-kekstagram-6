@@ -68,7 +68,7 @@ const applyEffectToImage = (value) => {
   }
 
   imagePreview.style.filter = `${effect.filter}(${value}${effect.unit})`;
-  valueElement.value = value; // ✅ пишем в скрытое поле для отправки на сервер
+  valueElement.value = value;
   showSlider();
 };
 
@@ -80,7 +80,6 @@ const setSliderForCurrentEffectAndResetToMax = () => {
     return;
   }
 
-  // ✅ обновляем диапазон/шаг
   sliderElement.noUiSlider.updateOptions({
     range: {
       min: effect.min,
@@ -89,7 +88,7 @@ const setSliderForCurrentEffectAndResetToMax = () => {
     step: effect.step,
   });
 
-  // ✅ “100%” по ТЗ = начальное состояние, ставим максимум эффекта
+ 
   sliderElement.noUiSlider.set(effect.max);
   applyEffectToImage(effect.max);
 };
@@ -101,7 +100,6 @@ const onEffectChange = (evt) => {
 
   currentEffect = evt.target.value;
 
-  // ✅ важно: сброс уровня должен срабатывать при переключении фильтра
   setSliderForCurrentEffectAndResetToMax();
 };
 
@@ -114,13 +112,11 @@ const onSliderUpdate = () => {
   const raw = sliderElement.noUiSlider.get();
   const effect = EFFECTS[currentEffect];
 
-  // noUiSlider отдаёт строку — приводим красиво
   const value = effect.step < 1 ? Number(raw).toFixed(1) : String(parseInt(raw, 10));
   applyEffectToImage(value);
 };
 
 const initEffects = () => {
-  // создаём слайдер только один раз
   if (!sliderCreated) {
     noUiSlider.create(sliderElement, {
       range: {
@@ -138,7 +134,6 @@ const initEffects = () => {
     sliderCreated = true;
   }
 
-  // ✅ по умолчанию “Оригинал”
   currentEffect = DEFAULT_EFFECT;
   const noneRadio = effectsContainer.querySelector('input[value="none"]');
   if (noneRadio) {
@@ -162,7 +157,7 @@ const resetEffects = () => {
   valueElement.value = '';
   hideSlider();
 
-  // слайдер можно оставить созданным, но он скрыт в режиме none
+ 
   if (sliderCreated) {
     sliderElement.noUiSlider.set(1);
   }
