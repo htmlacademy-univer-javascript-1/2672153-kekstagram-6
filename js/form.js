@@ -1,5 +1,5 @@
 import { isEscapeKey } from './utils.js';
-import { initEffects, resetEffects, destroyEffects } from './effects.js';
+import { initEffects, resetEffects } from './effects.js';
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
