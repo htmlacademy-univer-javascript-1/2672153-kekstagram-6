@@ -24,7 +24,6 @@ const setActiveButton = (buttonId) => {
 };
 
 const getRandomUnique = (photos, count) => {
-  // перемешиваем копию (Fisher–Yates)
   const shuffled = photos.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -50,10 +49,8 @@ const getFilteredPhotos = (filterId, photos) => {
 };
 
 const initFilters = (photos, onFilterChange) => {
-  // 5.2 — показываем блок фильтров только после загрузки данных
   filtersBlock.classList.remove('img-filters--inactive');
 
-  // 5.3 — перерисовка не чаще 1 раза в 500мс
   const debouncedRender = debounce((filterId) => {
     onFilterChange(getFilteredPhotos(filterId, photos));
   }, RERENDER_DELAY);
