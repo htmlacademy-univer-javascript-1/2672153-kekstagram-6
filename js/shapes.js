@@ -1,48 +1,45 @@
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
-const SCALE_DEFAULT = 100;
 const SCALE_STEP = 25;
+const SCALE_DEFAULT = 100;
 
 const imagePreview = document.querySelector('.img-upload__preview img');
-const scaleSize = document.querySelector('.img-upload__scale');
-const scaleSizeControl = scaleSize.querySelector('.scale__control--value');
-const smallerButton = scaleSize.querySelector('.scale__control--smaller');
-const biggerButton = scaleSize.querySelector('.scale__control--bigger');
-let currentScale = SCALE_DEFAULT;
+const scaleControlValue = document.querySelector('.scale__control--value');
+const buttonSmaller = document.querySelector('.scale__control--smaller');
+const buttonBigger = document.querySelector('.scale__control--bigger');
 
-const setNewScale = (value) => {
-  imagePreview.style.transform = `scale(${value / 100})`;
-  scaleSizeControl.value = `${value}%`;
+const setScale = (value) => {
+  scaleControlValue.value = `${value}%`;              // запись в readonly поле формы
+  imagePreview.style.transform = `scale(${value / 100})`; // визуальный масштаб
 };
 
+const getScale = () => parseInt(scaleControlValue.value, 10);
 
-const onSmallerButtonClick = () => {
-  currentScale = parseInt(scaleSizeControl.value, 10);
-  let newScale = currentScale - SCALE_STEP;
-  if (newScale < SCALE_MIN) {
-    newScale = SCALE_MIN;
-  }
-  setNewScale(newScale);
+const onSmallerClick = () => {
+  const newValue = Math.max(SCALE_MIN, getScale() - SCALE_STEP);
+  setScale(newValue);
 };
 
-const onBiggerButtonClick = () => {
-  currentScale = parseInt(scaleSizeControl.value, 10);
-  let newScale = currentScale + SCALE_STEP;
-  if (newScale > SCALE_MAX) {
-    newScale = SCALE_MAX;
-  }
-  setNewScale(newScale);
+const onBiggerClick = () => {
+  const newValue = Math.min(SCALE_MAX, getScale() + SCALE_STEP);
+  setScale(newValue);
 };
 
 const initImageScale = () => {
-  smallerButton.addEventListener('click', onSmallerButtonClick);
-  biggerButton.addEventListener('click', onBiggerButtonClick);
+  // дефолтное значение при открытии формы
+  setScale(SCALE_DEFAULT);
+
+  buttonSmaller.addEventListener('click', onSmallerClick);
+  buttonBigger.addEventListener('click', onBiggerClick);
 };
 
-const scaleReset = () => {
-  setNewScale(SCALE_DEFAULT);
-  smallerButton.removeEventListener('click', initImageScale(onSmallerButtonClick));
-  biggerButton.removeEventListener('click', initImageScale(onBiggerButtonClick));
+const resetImageScale = () => {
+  // вернуть как было
+  setScale(SCALE_DEFAULT);
+
+  // убрать обработчики, чтобы не копились при повторных открытиях
+  buttonSmaller.removeEventListener('click', onSmallerClick);
+  buttonBigger.removeEventListener('click', onBiggerClick);
 };
 
-export { initImageScale, scaleReset };
+export { initImageScale, resetImageScale };
