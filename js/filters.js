@@ -13,6 +13,7 @@ const RERENDER_DELAY = 500;
 const filtersBlock = document.querySelector('.img-filters');
 const filtersForm = document.querySelector('.img-filters__form');
 
+// Устанавливает активную кнопку фильтра --- IGNORE ---
 const setActiveButton = (buttonId) => {
   filtersForm.querySelectorAll('.img-filters__button').forEach((btn) => {
     btn.classList.remove('img-filters__button--active');
