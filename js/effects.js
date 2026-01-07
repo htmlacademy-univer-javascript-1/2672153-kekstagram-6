@@ -88,7 +88,7 @@ const setSliderForCurrentEffectAndResetToMax = () => {
     step: effect.step,
   });
 
- 
+
   sliderElement.noUiSlider.set(effect.max);
   applyEffectToImage(effect.max);
 };
@@ -157,7 +157,7 @@ const resetEffects = () => {
   valueElement.value = '';
   hideSlider();
 
- 
+
   if (sliderCreated) {
     sliderElement.noUiSlider.set(1);
   }

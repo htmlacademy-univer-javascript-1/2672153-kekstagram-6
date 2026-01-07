@@ -4,7 +4,6 @@ import { initImageScale, resetImageScale } from './shapes.js';
 import { initEffects, resetEffects } from './effects.js';
 import { resetPreview } from './upload-preview.js';
 
-
 const { Pristine } = window;
 
 const body = document.querySelector('body');
@@ -80,12 +79,11 @@ const resetFormToDefault = () => {
   form.reset();
   fileInput.value = '';
 
-  resetPreview();     
-  resetImageScale();  
-  resetEffects();      
-  pristine.reset();    
+  resetPreview();
+  resetImageScale();
+  resetEffects();
+  pristine.reset();
 };
-
 
 const blockSubmit = () => {
   submitButton.disabled = true;
@@ -128,7 +126,6 @@ form.addEventListener('submit', async (evt) => {
     resetFormToDefault();
     showSuccessMessage();
   } catch (err) {
-   
     showErrorMessage();
   } finally {
     unblockSubmit();
